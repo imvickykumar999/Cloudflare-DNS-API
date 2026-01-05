@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "11d1f1ed-b618-41aa-b797-0a68772897f2",
+		"name": "RAILWAY.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25350357",
+		"_collection_link": "https://grey-flare-687554.postman.co/workspace/My-Workspace~f66982bb-efa3-4d6d-84f1-13a23da04d43/collection/25350357-11d1f1ed-b618-41aa-b797-0a68772897f2?action=share&source=collection_link&creator=25350357"
+	},
+	"item": [
+		{
+			"name": "Test Subdomain",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"DEPLOYMENT\",\n    \"deployment\": {\n        \"status\": \"CRASHED\" // OOM_KILLED, FAILED, CRASHED\n    },\n    \"project\": {\n        \"name\": \"Test Railway Project\"\n    },\n    \"service\": {\n        \"name\": \"youtube-stream\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://telegram.minecraftbedrock.dpdns.org/webhook",
+					"protocol": "https",
+					"host": [
+						"telegram",
+						"minecraftbedrock",
+						"dpdns",
+						"org"
+					],
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer u1Q0ji5xfvJB0C-o-vbDn7NSeyJtbQPtmKz3k3Xb"
+					}
+				],
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/user/tokens/verify",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"user",
+						"tokens",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get DNS Records",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer u1Q0ji5xfvJB0C-o-vbDn7NSeyJtbQPtmKz3k3Xb"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/f1f084ba1e015388bd7eea47bd38f6d1/dns_records",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"f1f084ba1e015388bd7eea47bd38f6d1",
+						"dns_records"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "A",
+							"description": "A, CNAME",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch CNAME by id",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer u1Q0ji5xfvJB0C-o-vbDn7NSeyJtbQPtmKz3k3Xb"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"wg49w1b2.up.railway.app\",\n    \"proxied\": true,\n    \"comment\": \"Updated via API\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/f1f084ba1e015388bd7eea47bd38f6d1/dns_records/44547231b700abacc09533cb0955c331",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"f1f084ba1e015388bd7eea47bd38f6d1",
+						"dns_records",
+						"44547231b700abacc09533cb0955c331"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New CNAME",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer u1Q0ji5xfvJB0C-o-vbDn7NSeyJtbQPtmKz3k3Xb"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"CNAME\",\n    \"name\": \"telegram\",\n    \"content\": \"wg49w1b2.up.railway.app\",\n    \"proxied\": true,\n    \"ttl\": 1,\n    \"comment\": \"Created via API\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/f1f084ba1e015388bd7eea47bd38f6d1/dns_records",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"f1f084ba1e015388bd7eea47bd38f6d1",
+						"dns_records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New A Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer CJsUFGLwBH0Np2OT_7oMOR2mTtsp28Uhzadr8MyZ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"A\",\n    \"name\": \"targetdomain\",\n    \"content\": \"1.2.3.4\",\n    \"proxied\": true,\n    \"ttl\": 1,\n    \"comment\": \"Added A record via API\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/f1f084ba1e015388bd7eea47bd38f6d1/dns_records",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"f1f084ba1e015388bd7eea47bd38f6d1",
+						"dns_records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch A Record",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer CJsUFGLwBH0Np2OT_7oMOR2mTtsp28Uhzadr8MyZ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"1.2.3.4\",\n    \"proxied\": true,\n    \"comment\": \"Updated A record via API\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/f1f084ba1e015388bd7eea47bd38f6d1/dns_records/070ac37361ad8efe07adfff312a1301c",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"f1f084ba1e015388bd7eea47bd38f6d1",
+						"dns_records",
+						"070ac37361ad8efe07adfff312a1301c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer CJsUFGLwBH0Np2OT_7oMOR2mTtsp28Uhzadr8MyZ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/f1f084ba1e015388bd7eea47bd38f6d1/dns_records/bf67a9d56e3eeac5240e1a9d40cc9627",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"f1f084ba1e015388bd7eea47bd38f6d1",
+						"dns_records",
+						"bf67a9d56e3eeac5240e1a9d40cc9627"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
